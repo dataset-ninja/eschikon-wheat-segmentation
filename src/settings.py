@@ -1,48 +1,69 @@
 from typing import Dict, List, Optional, Union
 
-from dataset_tools.templates import AnnotationType, CVTask, Industry, Domain, Research, License, Category
+from dataset_tools.templates import (
+    AnnotationType,
+    CVTask,
+    Industry,
+    Domain,
+    Research,
+    License,
+    Category,
+)
 
 ##################################
 # * Before uploading to instance #
 ##################################
-PROJECT_NAME: str = None
-PROJECT_NAME_FULL: str = None
+PROJECT_NAME: str = "EWS Dataset"
+PROJECT_NAME_FULL: str = "Eschikon Wheat Segmentation"
 
 ##################################
 # * After uploading to instance ##
 ##################################
-LICENSE: License = None
-APPLICATIONS: List[Union[Industry, Domain, Research]] = None
-CATEGORY: Category = None
+LICENSE: License = License.CC_BY_SA_4_0()
+APPLICATIONS: List[Union[Industry, Domain, Research]] = [
+    Industry.Agricultural(),
+    Domain.Industrial(),
+    Research.Agricultural(),
+]
+CATEGORY: Category = Category.Agriculture()
 
-CV_TASKS: List[CVTask] = None
-ANNOTATION_TYPES: List[AnnotationType] = None
+CV_TASKS: List[CVTask] = [CVTask.SemanticSegmentation()]
+ANNOTATION_TYPES: List[AnnotationType] = [AnnotationType.SemanticSegmentation()]
 
-RELEASE_DATE: Optional[str] = None  # e.g. "YYYY-MM-DD"
+RELEASE_DATE: Optional[str] = "2021-11-30"  # e.g. "YYYY-MM-DD"
 if RELEASE_DATE is None:
     RELEASE_YEAR: int = None
 
-HOMEPAGE_URL: str = None
+HOMEPAGE_URL: str = "https://doi.org/10.3929/ethz-b-000512332"
 # e.g. "https://some.com/dataset/homepage"
 
-PREVIEW_IMAGE_ID: int = None
+PREVIEW_IMAGE_ID: int = 1680073
 # This should be filled AFTER uploading images to instance, just ID of any image.
 
-GITHUB_URL: str = None
+GITHUB_URL: str = "https://github.com/dataset-ninja/eschikon-wheat-segmentation"
 # URL to GitHub repo on dataset ninja (e.g. "https://github.com/dataset-ninja/some-dataset")
 
 ##################################
 ### * Optional after uploading ###
 ##################################
-DOWNLOAD_ORIGINAL_URL: Optional[Union[str, dict]] = None
+DOWNLOAD_ORIGINAL_URL: Optional[
+    Union[str, dict]
+] = "https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/512332/EWS-Dataset.zip?sequence=2&isAllowed=y"
 # Optional link for downloading original dataset (e.g. "https://some.com/dataset/download")
 
 CLASS2COLOR: Optional[Dict[str, List[str]]] = None
 # If specific colors for classes are needed, fill this dict (e.g. {"class1": [255, 0, 0], "class2": [0, 255, 0]})
 
-PAPER: Optional[str] = None
-CITATION_URL: Optional[str] = None
-AUTHORS: Optional[List[str]] = None
+PAPER: Optional[str] = "https://doi.org/10.3389/fpls.2021.774068"
+CITATION_URL: Optional[str] = "https://doi.org/10.3389/fpls.2021.774068"
+AUTHORS: Optional[List[str]] = [
+    "Zenkl, Radek",
+    "Kirchgessner, Norbert",
+    "Roth, Lukas",
+    "Hund, Andreas",
+    "Walter, Achim",
+    "Aasen, Helge",
+]
 
 ORGANIZATION_NAME: Optional[Union[str, List[str]]] = None
 ORGANIZATION_URL: Optional[Union[str, List[str]]] = None

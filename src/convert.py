@@ -5,8 +5,10 @@ import src.settings as s
 from urllib.parse import unquote, urlparse
 from supervisely.io.fs import get_file_name, get_file_size
 import shutil
+import cv2
 
 from tqdm import tqdm
+
 
 def download_dataset(teamfiles_dir: str) -> str:
     """Use it for large datasets to convert them on the instance"""
@@ -53,20 +55,63 @@ def download_dataset(teamfiles_dir: str) -> str:
         dataset_path = storage_dir
     return dataset_path
 
+
 def convert_and_upload_supervisely_project(
     api: sly.Api, workspace_id: int, project_name: str
 ) -> sly.ProjectInfo:
-    ### Function should read local dataset and upload it to Supervisely project, then return project info.###
-    raise NotImplementedError("The converter should be implemented manually.")
+    datasets = [
+        "/mnt/c/Users/German/Documents/EWS-Dataset/test",
+        "/mnt/c/Users/German/Documents/EWS-Dataset/train",
+        "/mnt/c/Users/German/Documents/EWS-Dataset/validation",
+    ]
 
-    # dataset_path = "/local/path/to/your/dataset" # general way
-    # dataset_path = download_dataset(teamfiles_dir) # for large datasets stored on instance
+    def load_image_labels(image_path, labels_path):
+        image_info = api.image.upload_path(dataset.id, os.path.basename(image_path), image_path)
+        mask = cv2.imread(labels_path, cv2.IMREAD_GRAYSCALE)
+        # cv2.imwrite(image_info.name, mask)
+        thresh = 127
+        im_bw = cv2.threshold(mask, thresh, 255, cv2.THRESH_BINARY)[1]
+        mask = cv2.bitwise_not(im_bw)
+        labels = []
+        height = image_info.height
+        width = image_info.width
+        bitmap_annotation = sly.Bitmap(
+            mask,
+        )
+        obj_class = meta.get_obj_class("Wheat")
+        label = sly.Label(bitmap_annotation, obj_class)
+        labels.append(label)
+        ann = sly.Annotation(img_size=[height, width], labels=labels)
+        api.annotation.upload_ann(image_info.id, ann)
 
-    # ... some code here ...
+    project = api.project.create(workspace_id, project_name)
+    meta = sly.ProjectMeta()
 
-    # sly.logger.info('Deleting temporary app storage files...')
-    # shutil.rmtree(storage_dir)
+    obj_class = sly.ObjClass("Wheat", sly.Bitmap)
+    meta = meta.add_obj_class(obj_class)
+    api.project.update_meta(project.id, meta)
 
-    # return project
+    for single_dataset in datasets:
+        mask_path = sly.fs.list_files(single_dataset, valid_extensions=[".png"])
+        dictionary = dict({})
+        pbar = tqdm(desc=os.path.basename(single_dataset), total=len(mask_path) / 2)
+        for path in mask_path:
+            path_filename = sly.fs.get_file_name(path)
+            path_parts = path_filename.rstrip().split("_")
+            # print(path_parts)
+            if len(path_parts) <= 5:
+                dictionary[path] = path[:-4] + "_mask.png"
 
-
+        dataset = api.dataset.create(project.id, os.path.basename(single_dataset))
+        # upload masks to images
+        for k, v in dictionary.items():
+            try:
+                load_image_labels(k, v)
+                pbar.update(1)
+            except Exception as e:
+                print(e)
+                pbar.update(1)
+                continue
+        pbar.close()
+    print(f"Dataset {dataset.name} has been successfully created.")
+    return project
