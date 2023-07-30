@@ -2,19 +2,19 @@ from typing import Dict, List, Optional, Union
 
 from dataset_tools.templates import (
     AnnotationType,
-    CVTask,
-    Industry,
-    Domain,
-    Research,
-    License,
     Category,
+    CVTask,
+    Domain,
+    Industry,
+    License,
+    Research,
 )
 
 ##################################
 # * Before uploading to instance #
 ##################################
-PROJECT_NAME: str = "EWS Dataset"
-PROJECT_NAME_FULL: str = "Eschikon Wheat Segmentation"
+PROJECT_NAME: str = "EWS"
+PROJECT_NAME_FULL: str = "EWS: Eschikon Wheat Segmentation Dataset"
 
 ##################################
 # * After uploading to instance ##
@@ -22,8 +22,7 @@ PROJECT_NAME_FULL: str = "Eschikon Wheat Segmentation"
 LICENSE: License = License.CC_BY_SA_4_0()
 APPLICATIONS: List[Union[Industry, Domain, Research]] = [
     Industry.Agricultural(),
-    Domain.Industrial(),
-    Research.Agricultural(),
+    Research.Genetic(),
 ]
 CATEGORY: Category = Category.Agriculture()
 
@@ -55,7 +54,7 @@ CLASS2COLOR: Optional[Dict[str, List[str]]] = None
 # If specific colors for classes are needed, fill this dict (e.g. {"class1": [255, 0, 0], "class2": [0, 255, 0]})
 
 PAPER: Optional[str] = "https://doi.org/10.3389/fpls.2021.774068"
-CITATION_URL: Optional[str] = "https://doi.org/10.3389/fpls.2021.774068"
+CITATION_URL: Optional[str] = "https://www.research-collection.ethz.ch/handle/20.500.11850/512332"
 AUTHORS: Optional[List[str]] = [
     "Zenkl, Radek",
     "Kirchgessner, Norbert",
@@ -65,8 +64,14 @@ AUTHORS: Optional[List[str]] = [
     "Aasen, Helge",
 ]
 
-ORGANIZATION_NAME: Optional[Union[str, List[str]]] = None
-ORGANIZATION_URL: Optional[Union[str, List[str]]] = None
+ORGANIZATION_NAME: Optional[Union[str, List[str]]] = [
+    "ETH Zurich, Switzerland",
+    "Agroscope, Switzerland",
+]
+ORGANIZATION_URL: Optional[Union[str, List[str]]] = [
+    "https://ethz.ch/en.html",
+    "https://www.agroscope.admin.ch/agroscope/en/home.html",
+]
 
 SLYTAGSPLIT: Optional[Dict[str, List[str]]] = None
 TAGS: Optional[List[str]] = None
