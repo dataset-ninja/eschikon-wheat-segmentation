@@ -23,7 +23,6 @@ HIDE_DATASET = True  # set False when 100% sure about repo quality
 LICENSE: License = License.CC_BY_SA_4_0()
 APPLICATIONS: List[Union[Industry, Domain, Research]] = [
     Industry.Agricultural(),
-    Research.Genetic(),
 ]
 CATEGORY: Category = Category.Agriculture()
 
