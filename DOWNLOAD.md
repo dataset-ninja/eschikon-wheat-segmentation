@@ -1,6 +1,6 @@
-Dataset **EWS** can be downloaded in Supervisely format:
+Dataset **EWS** can be downloaded in [Supervisely format](https://developer.supervisely.com/api-references/supervisely-annotation-json-format):
 
- [Download](https://assets.supervisely.com/supervisely-supervisely-assets-public/teams_storage/v/e/8N/0EvPlQkq0tdPEDuEr3HbT4qLNoO2Ps52zG0S5AdXsntgUXuJeNd5d2nRkvYV1aAJYkydiWEdCzgWNm570HgtytdIE1VeZ4Bd7p8dIyTEXcYSA3R1FQSmFmatWiDr.tar)
+ [Download](Set 'HIDE_DATASET=False' to generate download link)
 
 As an alternative, it can be downloaded with *dataset-tools* package:
 ``` bash
@@ -11,6 +11,8 @@ pip install --upgrade dataset-tools
 ``` python
 import dataset_tools as dtools
 
-dtools.download(dataset='EWS', dst_path='~/dtools/datasets/EWS.tar')
+dtools.download(dataset='EWS', dst_dir='~/dataset-ninja/')
 ```
-The data in original format can be 🔗[downloaded here](https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/512332/EWS-Dataset.zip?sequence=2&isAllowed=y)
+Make sure not to overlook the [python code example](https://developer.supervisely.com/getting-started/python-sdk-tutorials/iterate-over-a-local-project) available on the Supervisely Developer Portal. It will give you a clear idea of how to effortlessly work with the downloaded dataset.
+
+The data in original format can be [downloaded here](https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/512332/EWS-Dataset.zip?sequence=2&isAllowed=y).
