@@ -1,6 +1,6 @@
 Dataset **EWS** can be downloaded in [Supervisely format](https://developer.supervisely.com/api-references/supervisely-annotation-json-format):
 
- [Download](https://assets.supervisely.com/supervisely-supervisely-assets-public/teams_storage/K/P/7j/GUvvFDbgh9Mie1sh4xN0qZxjk8e3yVPAdpFtew4C7jFaLqPTSxI5GoVo0zlDkq3iO13I64Lw3qoHzbpWFUgggy4lWHscev0ZK5znS8Q4sNri4NkNkKcfa2sZSji9.tar)
+ [Download](https://assets.supervisely.com/supervisely-supervisely-assets-public/teams_storage/p/P/nW/WPW94w89kuJtLNqVP3NikWZeYKJSGkwfkcq6b0vxuHhAuHoCbl05IuvMtQtnstpS4pxQv6tu555Ts2bwKB7dqYbrQuWaAcBRhYL9WpvDL3jjEeDpaMqTU8SJTWOU.tar)
 
 As an alternative, it can be downloaded with *dataset-tools* package:
 ``` bash
