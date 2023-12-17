@@ -24,7 +24,7 @@ LICENSE: License = License.CC_BY_SA_4_0()
 APPLICATIONS: List[Union[Industry, Domain, Research]] = [
     Industry.Agricultural(),
 ]
-CATEGORY: Category = Category.Agriculture()
+CATEGORY: Category = Category.Agriculture(extra=Category.Tutorial())
 
 CV_TASKS: List[CVTask] = [CVTask.SemanticSegmentation(), CVTask.UnsupervisedLearning()]
 ANNOTATION_TYPES: List[AnnotationType] = [AnnotationType.SemanticSegmentation()]
